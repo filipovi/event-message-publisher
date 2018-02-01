@@ -23,7 +23,7 @@ type EventMessage struct {
 	Metadata  map[string][]string `json:"metadata"`
 }
 
-// Env is a structure who contains the Rabbitmq client
+// Env is a structure who contains the Rabbitmq channel
 type Env struct {
 	channel rabbitmq.Channel
 }
@@ -73,12 +73,9 @@ func main() {
 	failOnError(err, "Failed to get a apmq channel")
 
 	err = env.channel.NewExchange(rabbitmq.Exchange{
-		"event_message.mailchimp",
-		"fanout",
-		true,
-		false,
-		false,
-		false,
+		Name:         "event_message.mailchimp",
+		ExchangeType: "fanout",
+		Durable:      true,
 	})
 	failOnError(err, "Failed to create an apmq exchange")
 
