@@ -1,0 +1,8 @@
+{
+  "name": "event-message-publisher",
+  "description": "Send an EventMessage to RabbitMQ.",
+  "image": "heroku/go:1.9",
+  "mount_dir": "src/github.com/filipovi/event-message-publisher",
+  "website": "https://github.com/filipovi/event-message-publisher",
+  "repository": "https://github.com/filipovi/event-message-publisher"
+}

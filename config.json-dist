@@ -1,0 +1,5 @@
+{
+  "rabbitmq": {
+    "url": "amqp://APMQ_LOGIN:APMQ_PASSWORD@APMQ_HOST:APMQ_PORT/"
+  }
+}
