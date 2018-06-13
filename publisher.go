@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"path/filepath"
 
-	"github.com/filipovi/event-message-publisher/config"
-	"github.com/filipovi/event-message-publisher/rabbitmq"
+	"github.com/filipovi/rabbitmq"
 )
 
 /**
@@ -51,8 +51,13 @@ func createMessage() EventMessage {
 	return message
 }
 
-func connect(cfg config.Config) (*Env, error) {
-	rabbitmq, err := rabbitmq.New(cfg.Rabbitmq.URL)
+func connect(file string) (*Env, error) {
+	path, err := filepath.Abs(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	rabbitmq, err := rabbitmq.New(path)
 	if nil != err {
 		return nil, err
 	}
@@ -66,20 +71,10 @@ func connect(cfg config.Config) (*Env, error) {
 }
 
 func main() {
-	cfg, err := config.New("config.json")
-	failOnError(err, "Failed to read config.json")
-
-	env, err := connect(cfg)
+	env, err := connect("config.json")
 	failOnError(err, "Failed to get a apmq channel")
 
-	err = env.channel.NewExchange(rabbitmq.Exchange{
-		"event_message.mailchimp",
-		"fanout",
-		true,
-		false,
-		false,
-		false,
-	})
+	err = env.channel.NewExchange("event_message.mailchimp")
 	failOnError(err, "Failed to create an apmq exchange")
 
 	message := createMessage()

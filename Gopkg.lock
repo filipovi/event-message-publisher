@@ -3,6 +3,15 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/filipovi/rabbitmq"
+  packages = [
+    ".",
+    "config"
+  ]
+  revision = "8f422adb051f23af75caa42cedf893cb4f1dbe27"
+
+[[projects]]
+  branch = "master"
   name = "github.com/streadway/amqp"
   packages = ["."]
   revision = "ff791c2d22d3f1588b4e2cc71a9fba5e1da90654"
@@ -10,6 +19,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "baf1c9c4dc07eee188ef16d427c2c10c42e4ffee29207fadb3de0a731a104f9d"
+  inputs-digest = "6839c9925c75aea8098ef124cc666b3e27e90e57807806bbc9a159728007ab49"
   solver-name = "gps-cdcl"
   solver-version = 1
